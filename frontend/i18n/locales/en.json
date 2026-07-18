@@ -1,0 +1,41 @@
+{
+  "app": {
+    "name": "FloodGuard Texas",
+    "tagline": "Flood risk for people & neighborhoods"
+  },
+  "nav": {
+    "map": "Map",
+    "about": "About"
+  },
+  "common": {
+    "loading": "Loading…",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode",
+    "createdBy": "Created by"
+  },
+  "home": {
+    "title": "Is your neighborhood flood-ready?",
+    "subtitle": "Look up a Texas ZIP or tap the map. Demo risk scores help families and renters understand local flood exposure — not an insurance quote.",
+    "zipLabel": "ZIP code",
+    "zipPlaceholder": "77002",
+    "check": "Check risk",
+    "riskTitle": "Risk snapshot",
+    "hint": "Enter a 5-digit ZIP or click a map pin to see risk factors.",
+    "disclaimer": "Demo scores only. Not a FEMA flood-zone determination. Do not use for insurance or legal decisions.",
+    "legend": "Risk levels",
+    "lookupError": "Could not look up risk. Try another ZIP.",
+    "nearest": "Nearest demo zone · {km} km"
+  },
+  "levels": {
+    "low": "Low",
+    "moderate": "Moderate",
+    "high": "High",
+    "extreme": "Extreme"
+  },
+  "about": {
+    "title": "About FloodGuard",
+    "body": "FloodGuard Texas is a public-impact portal in the TxBizFinder Intelligence suite. It helps everyday Texans see illustrative flood risk near them — bayous, coast, flash-flood alley — with a map-first experience.",
+    "sources": "MVP uses curated demo zones for major metros. Future versions can plug in FEMA NFHL layers and NWS alerts behind the same lookup API.",
+    "suite": "Sister apps: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse Texas."
+  }
+}

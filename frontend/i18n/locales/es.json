@@ -1,0 +1,41 @@
+{
+  "app": {
+    "name": "FloodGuard Texas",
+    "tagline": "Riesgo de inundación para gente y barrios"
+  },
+  "nav": {
+    "map": "Mapa",
+    "about": "Acerca de"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "lightMode": "Modo claro",
+    "darkMode": "Modo oscuro",
+    "createdBy": "Creado por"
+  },
+  "home": {
+    "title": "¿Tu barrio está listo ante inundaciones?",
+    "subtitle": "Busca un ZIP de Texas o toca el mapa. Puntajes demo para que familias e inquilinos entiendan la exposición local — no es una cotización de seguro.",
+    "zipLabel": "Código postal",
+    "zipPlaceholder": "77002",
+    "check": "Ver riesgo",
+    "riskTitle": "Resumen de riesgo",
+    "hint": "Escribe un ZIP de 5 dígitos o haz clic en un pin del mapa.",
+    "disclaimer": "Solo puntajes demo. No es una determinación oficial de FEMA. No usar para seguros ni decisiones legales.",
+    "legend": "Niveles de riesgo",
+    "lookupError": "No se pudo consultar el riesgo. Prueba otro ZIP.",
+    "nearest": "Zona demo más cercana · {km} km"
+  },
+  "levels": {
+    "low": "Bajo",
+    "moderate": "Moderado",
+    "high": "Alto",
+    "extreme": "Extremo"
+  },
+  "about": {
+    "title": "Acerca de FloodGuard",
+    "body": "FloodGuard Texas es un portal de impacto público en la suite TxBizFinder Intelligence. Ayuda a la gente a ver riesgo ilustrativo de inundación cerca de ellos — bayous, costa, flash-flood alley — con mapa primero.",
+    "sources": "El MVP usa zonas demo en metros principales. Versiones futuras pueden conectar capas FEMA NFHL y alertas NWS en la misma API.",
+    "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse Texas."
+  }
+}

@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* FloodGuard: deep water blue + sky accents */
+:root {
+  --background: hsl(210 30% 98%);
+  --foreground: hsl(215 28% 12%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(215 28% 12%);
+  --primary: hsl(199 89% 42%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(210 20% 94%);
+  --secondary-foreground: hsl(215 20% 22%);
+  --muted: hsl(210 16% 95%);
+  --muted-foreground: hsl(215 12% 42%);
+  --accent: hsl(199 80% 94%);
+  --accent-foreground: hsl(199 80% 28%);
+  --destructive: hsl(0 72% 45%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 16% 88%);
+  --input: hsl(210 14% 84%);
+  --ring: hsl(199 89% 42%);
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: hsl(215 28% 7%);
+  --foreground: hsl(210 20% 94%);
+  --card: hsl(215 26% 10%);
+  --card-foreground: hsl(210 20% 94%);
+  --primary: hsl(199 89% 52%);
+  --primary-foreground: hsl(215 40% 8%);
+  --secondary: hsl(215 20% 15%);
+  --secondary-foreground: hsl(210 20% 94%);
+  --muted: hsl(215 18% 14%);
+  --muted-foreground: hsl(215 12% 62%);
+  --accent: hsl(199 40% 16%);
+  --accent-foreground: hsl(199 90% 72%);
+  --destructive: hsl(0 72% 52%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(215 16% 18%);
+  --input: hsl(215 16% 22%);
+  --ring: hsl(199 89% 52%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.maplibregl-popup-content {
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.18);
+  padding: 10px 12px;
+}
+.maplibregl-ctrl-group {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ── FloodGuard motion / polish ─────────────────────────── */
+.fg-hero {
+  background:
+    radial-gradient(120% 80% at 0% 0%, hsl(199 89% 48% / 0.12), transparent 55%),
+    radial-gradient(80% 60% at 100% 100%, hsl(199 70% 40% / 0.08), transparent 50%),
+    var(--card);
+}
+.fg-hero__glow {
+  position: absolute;
+  inset: -40% -20% auto auto;
+  width: 55%;
+  height: 120%;
+  background: radial-gradient(circle, hsl(199 89% 55% / 0.18), transparent 70%);
+  pointer-events: none;
+  animation: fg-drift 10s ease-in-out infinite alternate;
+}
+@keyframes fg-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-8%, 6%) scale(1.08); }
+}
+
+.fg-input {
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.fg-input:focus {
+  border-color: var(--primary);
+}
+
+.fg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  transition: transform 0.15s, border-color 0.15s, background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.fg-chip:hover {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  color: var(--foreground);
+  transform: translateY(-1px);
+}
+.fg-chip:active {
+  transform: translateY(0) scale(0.98);
+}
+.fg-chip--on {
+  border-color: color-mix(in srgb, var(--primary) 55%, transparent);
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+}
+
+.fg-map-shell {
+  border-radius: 1rem;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 18%, transparent),
+    0 18px 40px -24px hsl(199 80% 30% / 0.45);
+  /* overflow visible so map canvas/controls aren't clipped to 0 height */
+  overflow: visible;
+  transition: box-shadow 0.25s;
+}
+.fg-map-shell:hover {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 28%, transparent),
+    0 22px 48px -20px hsl(199 80% 30% / 0.55);
+}
+
+.fg-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+}
+.fg-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -18px rgb(0 0 0 / 0.35);
+}
+.fg-card--risk {
+  animation: fg-in 0.35s ease-out both;
+}
+
+.fg-factor {
+  animation: fg-in 0.35s ease-out both;
+}
+
+@keyframes fg-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fg-pulse {
+  animation: fg-shimmer 1.2s ease-in-out infinite;
+}
+@keyframes fg-shimmer {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.9; }
+}
+
+.fg-skeleton {
+  background: linear-gradient(
+    110deg,
+    var(--muted) 25%,
+    color-mix(in srgb, var(--muted) 60%, white) 40%,
+    var(--muted) 55%
+  );
+  background-size: 200% 100%;
+  animation: fg-shimmer-bg 1.4s linear infinite;
+}
+@keyframes fg-shimmer-bg {
+  to { background-position: -200% 0; }
+}
+
+.fg-panel-enter-active,
+.fg-panel-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.fg-panel-enter-from,
+.fg-panel-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fg-hero__glow,
+  .fg-card--risk,
+  .fg-factor,
+  .fg-pulse,
+  .fg-skeleton {
+    animation: none !important;
+  }
+  .fg-card:hover,
+  .fg-chip:hover {
+    transform: none;
+  }
+}
