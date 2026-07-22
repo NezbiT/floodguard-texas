@@ -24,7 +24,9 @@
     "disclaimer": "Solo puntajes demo. No es una determinación oficial de FEMA. No usar para seguros ni decisiones legales.",
     "legend": "Niveles de riesgo",
     "lookupError": "No se pudo consultar el riesgo. Prueba otro ZIP.",
-    "nearest": "Zona demo más cercana · {km} km"
+    "nearest": "Zona demo más cercana · {km} km",
+    "nwsTitle": "Alertas NWS activas (TX, inundación)",
+    "nwsNone": "No hay alertas NWS de inundación activas en Texas ahora."
   },
   "levels": {
     "low": "Bajo",
@@ -35,7 +37,7 @@
   "about": {
     "title": "Acerca de FloodGuard",
     "body": "FloodGuard Texas es un portal de impacto público en la suite TxBizFinder Intelligence. Ayuda a la gente a ver riesgo ilustrativo de inundación cerca de ellos — bayous, costa, flash-flood alley — con mapa primero.",
-    "sources": "El MVP usa zonas demo en metros principales. Versiones futuras pueden conectar capas FEMA NFHL y alertas NWS en la misma API.",
+    "sources": "Puntajes demo + alertas en vivo del National Weather Service (api.weather.gov). Siguiente: FEMA NFHL y medidores USGS en la misma API.",
     "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse Texas."
   }
 }

@@ -24,7 +24,9 @@
     "disclaimer": "Demo scores only. Not a FEMA flood-zone determination. Do not use for insurance or legal decisions.",
     "legend": "Risk levels",
     "lookupError": "Could not look up risk. Try another ZIP.",
-    "nearest": "Nearest demo zone · {km} km"
+    "nearest": "Nearest demo zone · {km} km",
+    "nwsTitle": "Live NWS flood-related alerts (TX)",
+    "nwsNone": "No active flood-related NWS alerts in Texas right now."
   },
   "levels": {
     "low": "Low",
@@ -35,7 +37,7 @@
   "about": {
     "title": "About FloodGuard",
     "body": "FloodGuard Texas is a public-impact portal in the TxBizFinder Intelligence suite. It helps everyday Texans see illustrative flood risk near them — bayous, coast, flash-flood alley — with a map-first experience.",
-    "sources": "MVP uses curated demo zones for major metros. Future versions can plug in FEMA NFHL layers and NWS alerts behind the same lookup API.",
+    "sources": "Demo base scores for major metros plus live National Weather Service alerts (api.weather.gov). Next: FEMA NFHL layers and USGS gauges behind the same lookup API.",
     "suite": "Sister apps: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse Texas."
   }
 }

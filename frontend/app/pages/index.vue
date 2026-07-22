@@ -24,6 +24,10 @@ const { data: zonesData, pending: zonesPending } = await useFetch('/api/risk/zon
   server: false,
 })
 
+const { data: alertsData, pending: alertsPending } = await useFetch('/api/alerts/active', {
+  server: false,
+})
+
 const lookupQuery = ref<{ zip?: string; lat?: number; lng?: number } | null>(null)
 
 onMounted(() => {
@@ -56,6 +60,8 @@ watch(lookupQuery, (q) => {
 
 const zones = computed<FloodZone[]>(() => (zonesData.value?.zones as FloodZone[]) || [])
 const risk = computed(() => lookup.value?.risk)
+const alerts = computed(() => (alertsData.value?.alerts as Array<{ event: string; headline: string; severity: string }>) || [])
+const alertCount = computed(() => alertsData.value?.count ?? alerts.value.length)
 
 const mapCenter = computed(() => {
   const r = lookup.value?.risk
@@ -165,6 +171,22 @@ const scorePct = computed(() => Math.min(100, Math.max(0, scoreAnim.value)))
           {{ q.label }}
           <span class="opacity-60">{{ q.zip }}</span>
         </button>
+      </div>
+
+      <div
+        v-if="!alertsPending"
+        class="relative z-[1] mt-4 rounded-xl border border-sky-500/30 bg-sky-500/10 px-3 py-2 text-xs sm:text-sm"
+      >
+        <p class="font-semibold text-sky-800 dark:text-sky-300">
+          {{ t('home.nwsTitle') }} · {{ alertCount }}
+        </p>
+        <ul v-if="alerts.length" class="mt-1.5 space-y-1 text-muted-foreground">
+          <li v-for="(a, i) in alerts.slice(0, 3)" :key="i" class="line-clamp-2">
+            <span class="font-medium text-foreground">{{ a.event }}</span>
+            — {{ a.headline }}
+          </li>
+        </ul>
+        <p v-else class="mt-1 text-muted-foreground">{{ t('home.nwsNone') }}</p>
       </div>
     </section>
 
