@@ -150,13 +150,14 @@ export async function queryNfhlAtPoint(
   }
 }
 
-/** Geocode US ZIP via Zippopotam (free). TX preferred validation. */
+/** Geocode any US ZIP via Zippopotam (free). Nationwide. */
 export async function geocodeZip(zip: string): Promise<{
   ok: true
   zip: string
   lat: number
   lon: number
   place: string
+  state: string
 } | { ok: false; error: string }> {
   const z = zip.replace(/\D/g, '').slice(0, 5)
   if (z.length !== 5) return { ok: false, error: 'invalid zip' }
@@ -175,16 +176,14 @@ export async function geocodeZip(zip: string): Promise<{
     if (!place?.latitude || !place?.longitude) {
       return { ok: false, error: 'zip not found' }
     }
-    const state = place['state abbreviation'] || ''
-    if (state && state !== 'TX') {
-      return { ok: false, error: `ZIP is in ${state}, not Texas` }
-    }
+    const state = (place['state abbreviation'] || '').toUpperCase()
     return {
       ok: true,
       zip: z,
       lat: Number(place.latitude),
       lon: Number(place.longitude),
       place: [place['place name'], state].filter(Boolean).join(', '),
+      state,
     }
   } catch (e: any) {
     return { ok: false, error: e?.message || 'geocode failed' }

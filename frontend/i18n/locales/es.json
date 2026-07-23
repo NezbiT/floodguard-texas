@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "FloodGuard Texas",
-    "tagline": "Riesgo de inundación para gente y barrios"
+    "name": "FloodGuard",
+    "tagline": "Zonas FEMA NFHL · EE.UU."
   },
   "nav": {
     "map": "Mapa",
@@ -15,18 +15,18 @@
   },
   "home": {
     "title": "¿Tu barrio está listo ante inundaciones?",
-    "subtitle": "Busca un ZIP de Texas o toca el mapa. Consultamos la capa nacional de riesgo de inundación de FEMA (NFHL) y alertas NWS — no es una cotización de seguro.",
-    "zipLabel": "Código postal",
-    "zipPlaceholder": "77002",
+    "subtitle": "Cualquier ZIP de EE.UU. o pin del mapa. Consultamos FEMA NFHL a nivel nacional y alertas NWS en ese punto — no es una cotización de seguro.",
+    "zipLabel": "ZIP de EE.UU.",
+    "zipPlaceholder": "33139",
     "check": "Ver riesgo",
     "riskTitle": "Resumen de riesgo",
-    "hint": "Escribe un ZIP de 5 dígitos o haz clic en un pin del mapa para ver la zona FEMA.",
+    "hint": "Escribe cualquier ZIP de 5 dígitos de EE.UU. o haz clic en un pin para ver la zona FEMA.",
     "disclaimer": "Solo informativo. Datos NFHL de FEMA cuando hay cobertura. No es una determinación oficial para seguros o préstamos.",
     "legend": "Niveles de riesgo",
     "lookupError": "No se pudo consultar el riesgo. Prueba otro ZIP.",
     "nearest": "Zona demo más cercana · {km} km",
-    "nwsTitle": "Alertas NWS activas (TX, inundación)",
-    "nwsNone": "No hay alertas NWS de inundación activas en Texas ahora.",
+    "nwsTitle": "Alertas NWS de inundación",
+    "nwsNone": "No hay alertas NWS de inundación en el alcance actual.",
     "femaBadge": "FEMA NFHL",
     "femaZone": "Zona de inundación",
     "femaSfha": "Área especial de riesgo (SFHA)",
@@ -42,8 +42,8 @@
   },
   "about": {
     "title": "Acerca de FloodGuard",
-    "body": "FloodGuard Texas es un portal de impacto público en la suite TxBizFinder Intelligence. Ayuda a la gente a ver riesgo ilustrativo de inundación cerca de ellos — bayous, costa, flash-flood alley — con mapa primero.",
-    "sources": "FEMA NFHL MapServer (zonas de peligro, capa 28) para consultas por punto, más alertas NWS. Los pins del mapa usan centroides demo. Siguiente: medidores USGS y claims OpenFEMA.",
-    "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse Texas."
+    "body": "FloodGuard es el producto de inundación de TxBizFinder Intelligence. FEMA NFHL es nacional: cualquier ZIP de EE.UU. Empezó en Texas; la cobertura es USA donde hay mapas efectivos.",
+    "sources": "FEMA NFHL MapServer (capa 28) a nivel nacional, NWS por punto/estado, geocodificación Zippopotam. Pins de metros de ejemplo. Siguiente: USGS y OpenFEMA.",
+    "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse, MapHub."
   }
 }

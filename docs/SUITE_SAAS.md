@@ -4,7 +4,7 @@ Part of **TxBizFinder Intelligence** (Texas situational awareness for contractor
 
 ## Product role
 
-ZIP / map **flood risk awareness** with **FEMA NFHL** point lookup (public MapServer) + live **NWS alerts**.
+ZIP / map **flood risk awareness** for the **entire USA** via **FEMA NFHL** (national MapServer) + **NWS** alerts by point/state.
 
 ## Unified stack
 

@@ -1,10 +1,10 @@
 /**
- * ZIP / lat-lng risk lookup.
- * Priority: FEMA NFHL (official effective zones) → demo base + NWS boost.
+ * ZIP / lat-lng risk lookup — nationwide USA.
+ * Priority: FEMA NFHL (national) → demo base + NWS boost at point/state.
  */
 import { lookupByPoint, lookupByZip, syntheticForZip, type DemoZone } from '../../utils/demo'
 import { geocodeZip, queryNfhlAtPoint } from '../../utils/nfhl'
-import { alertBoostForZip, fetchTxAlerts } from '../../utils/nws'
+import { alertBoostForZip, fetchFloodAlerts } from '../../utils/nws'
 import { apiEnvelope } from '../../utils/suite'
 
 function clamp(n: number) {
@@ -20,11 +20,11 @@ function levelFromScore(score: number): DemoZone['level'] {
 
 const DISCLAIMER_NFHL =
   'Flood zone from FEMA National Flood Hazard Layer (NFHL, effective data via public ArcGIS REST). ' +
-  'For educational / situational awareness only — not an official flood determination, LOMA/LOMR, ' +
-  'survey, or insurance rating. Always verify with a licensed professional and the official FIRM.'
+  'Coverage is nationwide where maps are modernized. Educational / situational awareness only — ' +
+  'not an official flood determination, LOMA/LOMR, survey, or insurance rating.'
 
 const DISCLAIMER_DEMO =
-  'Hybrid demo base score + live NWS alert boost (FEMA NFHL unavailable at this point). ' +
+  'Hybrid demo base + live NWS (FEMA NFHL unavailable at this point). ' +
   'Not a FEMA flood-zone determination. Do not use for insurance or legal decisions.'
 
 export default defineEventHandler(async (event) => {
@@ -38,22 +38,24 @@ export default defineEventHandler(async (event) => {
   let zip = zipRaw && /^\d{5}/.test(zipRaw) ? zipRaw.slice(0, 5) : ''
   let placeName: string | null = null
   let geoSource: string | null = null
+  let state: string | null = null
 
-  // Resolve coordinates for ZIP
+  // Prefer live geocode for any US ZIP (nationwide); curated pins only for map names
   if (zip && (!Number.isFinite(lat) || !Number.isFinite(lng))) {
-    const curated = lookupByZip(zip)
-    if (curated) {
-      lat = curated.lat
-      lng = curated.lon
-      placeName = curated.name
-      geoSource = 'demo-centroid'
+    const geo = await geocodeZip(zip)
+    if (geo.ok) {
+      lat = geo.lat
+      lng = geo.lon
+      placeName = geo.place
+      state = geo.state
+      geoSource = 'zippopotam'
     } else {
-      const geo = await geocodeZip(zip)
-      if (geo.ok) {
-        lat = geo.lat
-        lng = geo.lon
-        placeName = geo.place
-        geoSource = 'zippopotam'
+      const curated = lookupByZip(zip)
+      if (curated) {
+        lat = curated.lat
+        lng = curated.lon
+        placeName = curated.name
+        geoSource = 'demo-centroid'
       } else {
         const synth = syntheticForZip(zip)
         lat = synth.lat
@@ -67,33 +69,41 @@ export default defineEventHandler(async (event) => {
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Provide zip=##### or lat=&lng=',
+      statusMessage: 'Provide zip=##### (US) or lat=&lng=',
     })
   }
 
-  // Base demo context (name / zip / notes)
   let base: DemoZone & { distanceKm?: number }
   if (zip) {
-    base = lookupByZip(zip) || {
-      ...syntheticForZip(zip),
-      name: placeName || `ZIP ${zip}`,
-      lat,
-      lon: lng,
-    }
-    base = { ...base, lat, lon: lng }
+    const curated = lookupByZip(zip)
+    base = curated
+      ? { ...curated, lat, lon: lng, name: placeName || curated.name }
+      : {
+          ...syntheticForZip(zip),
+          name: placeName || `ZIP ${zip}`,
+          lat,
+          lon: lng,
+          populationNote: state
+            ? `US lookup · ${placeName || state}. FEMA NFHL is national where effective maps exist.`
+            : 'US ZIP lookup.',
+        }
   } else {
     base = lookupByPoint(lat, lng)
     zip = base.zip
   }
 
-  // Parallel: NWS + NFHL
   const [nws, nfhl] = await Promise.all([
     live
-      ? fetchTxAlerts({ floodOnly: true })
+      ? fetchFloodAlerts({
+          floodOnly: true,
+          point: { lat, lon: lng },
+          state: state || undefined,
+        })
       : Promise.resolve({
           source: 'nws' as const,
           count: 0,
           alerts: [] as any[],
+          scope: 'off',
           error: undefined as string | undefined,
         }),
     useNfhl
@@ -103,10 +113,9 @@ export default defineEventHandler(async (event) => {
 
   const { boost, matched } = alertBoostForZip(base.zip || zip, base.name, nws.alerts)
 
-  // ── FEMA NFHL primary path ─────────────────────────────────
   if (nfhl.ok) {
-    const score = clamp(nfhl.hit.score + Math.min(boost, 8)) // small NWS awareness bump
-    const level = boost >= 12 ? (score >= 85 ? 'extreme' : levelFromScore(score)) : nfhl.hit.level
+    const score = clamp(nfhl.hit.score + Math.min(boost, 8))
+    const level = nfhl.hit.level
     const risk = {
       id: base.id,
       zip: zip || base.zip,
@@ -115,9 +124,12 @@ export default defineEventHandler(async (event) => {
       lon: lng,
       level,
       score,
+      state,
       factors: [
         ...nfhl.hit.factors,
-        ...(boost > 0 ? [`Active NWS flood-related alerts nearby (+${Math.min(boost, 8)} awareness)`] : []),
+        ...(boost > 0
+          ? [`Active NWS flood-related alerts near point (+${Math.min(boost, 8)} awareness)`]
+          : []),
       ],
       populationNote: base.populationNote,
       distanceKm: 'distanceKm' in base ? base.distanceKm : undefined,
@@ -133,15 +145,17 @@ export default defineEventHandler(async (event) => {
       nws: {
         activeFloodRelated: nws.count,
         matchedEvents: matched,
+        scope: nws.scope,
         error: nws.error || null,
       },
       geoSource,
+      coverage: 'usa',
     }
 
     return apiEnvelope(
       {
         source: 'fema-nfhl',
-        query: zip ? { zip, lat, lng } : { lat, lng },
+        query: zip ? { zip, lat, lng, state } : { lat, lng },
         risk,
         disclaimer: DISCLAIMER_NFHL,
       },
@@ -149,7 +163,6 @@ export default defineEventHandler(async (event) => {
     )
   }
 
-  // ── Demo + NWS fallback ────────────────────────────────────
   const score = clamp(base.score + boost)
   const risk = {
     ...base,
@@ -159,6 +172,7 @@ export default defineEventHandler(async (event) => {
     name: placeName || base.name,
     score,
     level: levelFromScore(score),
+    state,
     factors: [
       ...base.factors,
       ...(boost > 0 ? [`NWS active flood-related alerts (+${boost})`] : []),
@@ -168,16 +182,18 @@ export default defineEventHandler(async (event) => {
     nws: {
       activeFloodRelated: nws.count,
       matchedEvents: matched,
+      scope: nws.scope,
       error: nws.error || null,
     },
     geoSource,
     nfhlError: nfhl.error,
+    coverage: 'usa',
   }
 
   return apiEnvelope(
     {
       source: 'demo+nws',
-      query: zip ? { zip, lat, lng } : { lat, lng },
+      query: zip ? { zip, lat, lng, state } : { lat, lng },
       risk,
       disclaimer: DISCLAIMER_DEMO,
     },

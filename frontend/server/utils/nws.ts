@@ -1,7 +1,7 @@
 /**
  * Free National Weather Service API (no key).
  * https://www.weather.gov/documentation/services-web-api
- * Requires a descriptive User-Agent.
+ * Supports US states + point queries (nationwide).
  */
 
 export type NwsAlert = {
@@ -16,7 +16,7 @@ export type NwsAlert = {
   description: string
 }
 
-const UA = 'FloodGuardTexas/1.1 (txbizfinder.com; flood-risk-awareness; contact@txbizfinder.com)'
+const UA = 'FloodGuard/1.3 (txbizfinder.com; nationwide flood awareness)'
 
 const FLOOD_EVENTS = [
   'flood',
@@ -31,12 +31,42 @@ const FLOOD_EVENTS = [
   'excessive rain',
 ]
 
-export async function fetchTxAlerts(opts: { floodOnly?: boolean } = {}): Promise<{
+export type AlertQuery = {
+  floodOnly?: boolean
+  /** Two-letter state, e.g. TX, FL, CA */
+  state?: string
+  /** Prefer point for local relevance (lat, lon WGS84) */
+  point?: { lat: number; lon: number }
+}
+
+/** @deprecated use fetchFloodAlerts — kept for call sites */
+export async function fetchTxAlerts(opts: AlertQuery = {}) {
+  return fetchFloodAlerts(opts)
+}
+
+export async function fetchFloodAlerts(opts: AlertQuery = {}): Promise<{
   source: 'nws'
   count: number
   alerts: NwsAlert[]
+  scope: string
   error?: string
 }> {
+  const query: Record<string, string> = {}
+  let scope = 'us-unscoped'
+
+  if (opts.point && Number.isFinite(opts.point.lat) && Number.isFinite(opts.point.lon)) {
+    // NWS: point=lat,lon
+    query.point = `${opts.point.lat},${opts.point.lon}`
+    scope = `point:${opts.point.lat.toFixed(3)},${opts.point.lon.toFixed(3)}`
+  } else if (opts.state && /^[A-Za-z]{2}$/.test(opts.state)) {
+    query.area = opts.state.toUpperCase()
+    scope = `state:${opts.state.toUpperCase()}`
+  } else {
+    // Default: still TX for the alerts strip if no geo — UI can pass state/point
+    query.area = 'TX'
+    scope = 'state:TX'
+  }
+
   try {
     const data = await $fetch<{
       features?: Array<{
@@ -44,7 +74,7 @@ export async function fetchTxAlerts(opts: { floodOnly?: boolean } = {}): Promise
         properties?: Record<string, any>
       }>
     }>('https://api.weather.gov/alerts/active', {
-      query: { area: 'TX' },
+      query,
       headers: {
         'User-Agent': UA,
         Accept: 'application/geo+json',
@@ -74,18 +104,19 @@ export async function fetchTxAlerts(opts: { floodOnly?: boolean } = {}): Promise
       })
     }
 
-    return { source: 'nws', count: alerts.length, alerts }
+    return { source: 'nws', count: alerts.length, alerts, scope }
   } catch (e: any) {
     return {
       source: 'nws',
       count: 0,
       alerts: [],
+      scope,
       error: e?.message || String(e),
     }
   }
 }
 
-/** Boost demo flood score when active NWS flood-related alerts mention nearby area. */
+/** Boost score when active NWS flood-related alerts mention nearby area. */
 export function alertBoostForZip(
   zip: string,
   cityHint: string | undefined,
@@ -97,12 +128,14 @@ export function alertBoostForZip(
   const matched: string[] = []
   for (const a of alerts.slice(0, 40)) {
     const area = a.areaDesc.toLowerCase()
-    if (area.includes(z) || (city && area.includes(city))) {
+    if (area.includes(z) || (city && city.length > 2 && area.includes(city))) {
       matched.push(a.event)
     }
   }
-  // Statewide severe flood traffic still slightly elevates awareness
-  const statewide = alerts.length >= 5 ? 4 : alerts.length >= 1 ? 2 : 0
+  // Point-scoped alerts are already local — any hit is meaningful
+  const base = alerts.length >= 3 ? 4 : alerts.length >= 1 ? 2 : 0
   const local = Math.min(18, matched.length * 6)
-  return { boost: statewide + local, matched: matched.slice(0, 5) }
+  // If query was by point and we got flood alerts, apply mild awareness boost
+  const pointAware = !matched.length && alerts.length > 0 ? 3 : 0
+  return { boost: base + local + pointAware, matched: matched.slice(0, 5) }
 }

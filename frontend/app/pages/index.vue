@@ -14,10 +14,12 @@ const scoreAnim = ref(0)
 const QUICK_ZIPS = [
   { zip: '77002', label: 'Houston' },
   { zip: '77550', label: 'Galveston' },
-  { zip: '78701', label: 'Austin' },
-  { zip: '75201', label: 'Dallas' },
-  { zip: '78205', label: 'San Antonio' },
-  { zip: '77701', label: 'Beaumont' },
+  { zip: '33139', label: 'Miami' },
+  { zip: '70112', label: 'New Orleans' },
+  { zip: '10001', label: 'NYC' },
+  { zip: '60601', label: 'Chicago' },
+  { zip: '90291', label: 'LA' },
+  { zip: '98101', label: 'Seattle' },
 ]
 
 const { data: zonesData, pending: zonesPending } = await useFetch('/api/risk/zones', {
