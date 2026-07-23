@@ -6,6 +6,7 @@ import { lookupByPoint, lookupByZip, syntheticForZip, type DemoZone } from '../.
 import { geocodeZip, queryNfhlAtPoint } from '../../utils/nfhl'
 import { alertBoostForZip, fetchFloodAlerts } from '../../utils/nws'
 import { apiEnvelope } from '../../utils/suite'
+import { getZoneExplanation, getTexasInsuranceLinks } from '../../utils/nfhl-glossary'
 
 function clamp(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)))
@@ -116,6 +117,8 @@ export default defineEventHandler(async (event) => {
   if (nfhl.ok) {
     const score = clamp(nfhl.hit.score + Math.min(boost, 8))
     const level = nfhl.hit.level
+    const zoneExp = getZoneExplanation(nfhl.hit.fldZone, nfhl.hit.zoneSubtype)
+    const texasLinks = state === 'TX' ? getTexasInsuranceLinks(nfhl.hit.fldZone) : []
     const risk = {
       id: base.id,
       zip: zip || base.zip,
@@ -141,6 +144,18 @@ export default defineEventHandler(async (event) => {
         depth: nfhl.hit.depth,
         fldArId: nfhl.hit.fldArId,
         label: nfhl.hit.label,
+        explanation: {
+          zone: zoneExp.zone,
+          shortLabel: zoneExp.shortLabel,
+          description: zoneExp.description,
+          riskLevel: zoneExp.riskLevel,
+          annualChance: zoneExp.annualChance,
+          insuranceRequired: zoneExp.insuranceRequired,
+          typicalInsuranceCost: zoneExp.typicalInsuranceCost,
+          keyFactors: zoneExp.keyFactors,
+          officialLinks: zoneExp.links,
+          texasInsuranceLinks: texasLinks,
+        },
       },
       nws: {
         activeFloodRelated: nws.count,

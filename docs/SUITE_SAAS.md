@@ -23,11 +23,19 @@ ZIP / map **flood risk awareness** for the **entire USA** via **FEMA NFHL** (nat
 
 ## Public data roadmap
 
+### ✅ Implemented (Phase 1)
 1. **FEMA NFHL** MapServer layer 28 — live (implemented on `/api/risk/lookup` + `/api/risk/nfhl`)
 2. **NWS** `api.weather.gov` — live (implemented)
-3. **USGS NWIS** stream gauges
-4. **NOAA CO-OPS** coastal water levels
-5. **OpenFEMA** FIMA NFIP claims (aggregate)
+3. **Zone Explanations** — FEMA NFHL glossary + insurance context (implemented)
+4. **TWIA Links** — Texas FAIR Plan (alternative insurance)
+5. **FEMA MSC Links** — Official Map Service Center references
+
+### 🔄 Roadmap (Phase 2-3)
+1. **USGS NWIS** stream gauges (nearby)
+2. **NOAA CO-OPS** coastal water levels (TX coast)
+3. **OpenFEMA** FIMA NFIP claims (aggregate by ZIP)
+4. **NOAA ATLAS 14** precipitation design storms
+5. **Rate limiting** + caching for federal APIs
 
 ## API
 

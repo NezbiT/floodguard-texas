@@ -259,18 +259,93 @@ const scorePct = computed(() => Math.min(100, Math.max(0, scoreAnim.value)))
 
             <div
               v-if="risk.fema"
-              class="mt-3 rounded-xl border border-black/10 bg-black/5 p-3 text-xs dark:border-white/10 dark:bg-white/5"
+              class="mt-3 space-y-3 rounded-xl border border-black/10 bg-black/5 p-3 text-xs dark:border-white/10 dark:bg-white/5"
             >
-              <p class="font-semibold">
-                {{ t('home.femaZone') }}:
-                <span class="tabular-nums">{{ risk.fema.fldZone }}</span>
+              <div>
+                <p class="font-semibold">
+                  {{ t('home.femaZone') }}:
+                  <span class="tabular-nums">{{ risk.fema.fldZone }}</span>
+                </p>
+                <p v-if="risk.fema.explanation" class="mt-1 text-xs font-medium text-primary">
+                  {{ risk.fema.explanation.shortLabel }}
+                </p>
+              </div>
+
+              <p v-if="risk.fema.explanation?.description" class="leading-relaxed opacity-90">
+                {{ risk.fema.explanation.description }}
               </p>
+
+              <div v-if="risk.fema.explanation" class="space-y-1.5">
+                <p v-if="risk.fema.explanation.annualChance" class="opacity-80">
+                  <span class="font-medium">{{ t('fema.annualChance') }}:</span>
+                  {{ risk.fema.explanation.annualChance }}
+                </p>
+                <p class="opacity-80">
+                  <span class="font-medium">{{ t('insurance.nfip') }}:</span>
+                  {{
+                    risk.fema.explanation.insuranceRequired
+                      ? t('fema.insuranceRequired')
+                      : t('fema.insuranceOptional')
+                  }}
+                </p>
+                <p v-if="risk.fema.explanation.typicalInsuranceCost" class="opacity-80">
+                  <span class="font-medium">{{ t('fema.typicalCost') }}:</span>
+                  {{ risk.fema.explanation.typicalInsuranceCost }}
+                </p>
+              </div>
+
               <p class="mt-1 opacity-90">
                 {{ t('home.femaSfha') }}:
                 {{ risk.fema.sfha ? t('home.femaYes') : t('home.femaNo') }}
               </p>
-              <p v-if="risk.fema.zoneSubtype" class="mt-1 opacity-80">{{ risk.fema.zoneSubtype }}</p>
-              <p class="mt-1 opacity-80">{{ risk.fema.label }}</p>
+              <p v-if="risk.fema.zoneSubtype" class="opacity-80">{{ risk.fema.zoneSubtype }}</p>
+              <p class="opacity-80">{{ risk.fema.label }}</p>
+
+              <div v-if="risk.fema.explanation?.keyFactors" class="border-t border-black/10 pt-2 dark:border-white/10">
+                <p class="mb-1.5 font-semibold">{{ t('fema.keyFactors') }}:</p>
+                <ul class="space-y-1">
+                  <li v-for="(f, i) in risk.fema.explanation.keyFactors.slice(0, 4)" :key="i" class="flex gap-2">
+                    <span class="shrink-0">•</span>
+                    <span>{{ f }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div v-if="risk.fema.explanation?.officialLinks" class="border-t border-black/10 pt-2 dark:border-white/10">
+                <p class="mb-2 text-[11px] font-semibold uppercase tracking-wider opacity-70">
+                  {{ t('fema.officialLinks') }}
+                </p>
+                <div class="space-y-1">
+                  <a
+                    v-for="link in risk.fema.explanation.officialLinks.slice(0, 2)"
+                    :key="link.url"
+                    :href="link.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block rounded bg-black/10 px-2 py-1 text-[11px] font-medium text-primary hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20"
+                  >
+                    {{ link.label }} →
+                  </a>
+                </div>
+              </div>
+
+              <div v-if="risk.state === 'TX' && risk.fema.explanation?.texasInsuranceLinks" class="border-t border-black/10 pt-2 dark:border-white/10">
+                <p class="mb-2 text-[11px] font-semibold uppercase tracking-wider opacity-70">
+                  {{ t('insurance.learnInsurance') }}
+                </p>
+                <div class="space-y-1">
+                  <a
+                    v-for="link in risk.fema.explanation.texasInsuranceLinks.slice(0, 2)"
+                    :key="link.url"
+                    :href="link.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block rounded bg-black/10 px-2 py-1 text-[11px] font-medium text-primary hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20"
+                  >
+                    {{ link.label }} →
+                  </a>
+                </div>
+              </div>
             </div>
             <p v-else class="mt-2 text-xs opacity-80">{{ t('home.femaFallback') }}</p>
 

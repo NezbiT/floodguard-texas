@@ -45,5 +45,35 @@
     "body": "FloodGuard es el producto de inundación de TxBizFinder Intelligence. FEMA NFHL es nacional: cualquier ZIP de EE.UU. Empezó en Texas; la cobertura es USA donde hay mapas efectivos.",
     "sources": "FEMA NFHL MapServer (capa 28) a nivel nacional, NWS por punto/estado, geocodificación Zippopotam. Pins de metros de ejemplo. Siguiente: USGS y OpenFEMA.",
     "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse, MapHub."
+  },
+  "fema": {
+    "zoneExplanation": "¿Qué significa esta zona?",
+    "zoneDetails": "Detalles de la zona",
+    "annualChance": "Probabilidad anual de inundación",
+    "insuranceRequired": "Seguro NFIP Requerido",
+    "insuranceOptional": "Seguro NFIP Opcional",
+    "typicalCost": "Costo típico del seguro",
+    "keyFactors": "Factores clave",
+    "officialLinks": "Recursos oficiales",
+    "msc": "Ver Centro de Mapeo FEMA",
+    "learnMore": "Más información",
+    "riskLevel": "Nivel de riesgo",
+    "sfha": "Área especial de riesgo (SFHA)"
+  },
+  "insurance": {
+    "nfip": "Programa Nacional de Seguro contra Inundaciones",
+    "nfipDescription": "Si tiene una hipoteca federal en una zona de inundación, el seguro es obligatorio.",
+    "twia": "TWIA — Seguros de Viento y Granizo de Texas",
+    "twiaDescription": "Opción alternativa de seguros en Texas para áreas no servidas por aseguradoras estándar.",
+    "tdi": "Departamento de Seguros de Texas",
+    "learnInsurance": "Aprende sobre seguros contra inundaciones"
+  },
+  "data": {
+    "fema": "Datos oficiales FEMA NFHL",
+    "nws": "Alertas NWS en tiempo real",
+    "openfema": "Datos de reclamaciones NFIP (OpenFEMA)",
+    "usgs": "Sensores de corriente (USGS NWIS)",
+    "noaa": "Niveles de agua (NOAA CO-OPS)",
+    "atlas14": "Precipitación de diseño (NOAA)"
   }
 }
