@@ -213,6 +213,7 @@ const scorePct = computed(() => Math.min(100, Math.max(0, scoreAnim.value)))
           </template>
         </ClientOnly>
         <p v-if="zonesPending" class="mt-2 text-xs text-muted-foreground">{{ t('common.loading') }}</p>
+        <p v-else class="mt-2 text-xs text-muted-foreground">{{ t('home.heatHint') }}</p>
       </div>
 
       <aside class="space-y-3 lg:sticky lg:top-[4.25rem] lg:self-start">
@@ -405,6 +406,11 @@ const scorePct = computed(() => Math.min(100, Math.max(0, scoreAnim.value)))
           <p class="mb-2.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {{ t('home.legend') }}
           </p>
+          <div
+            class="mb-3 h-2 w-full rounded-full"
+            style="background: linear-gradient(90deg, #16a34a 0%, #ca8a04 40%, #ea580c 65%, #b91c1c 100%)"
+            :title="t('home.heatHint')"
+          />
           <ul class="space-y-2 text-xs">
             <li v-for="lv in ['low', 'moderate', 'high', 'extreme']" :key="lv" class="flex items-center gap-2.5">
               <span class="size-2.5 rounded-full shadow-sm" :style="{ background: riskColor(lv) }" />

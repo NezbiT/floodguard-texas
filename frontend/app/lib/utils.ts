@@ -20,6 +20,15 @@ export function riskColor(level: string | undefined | null): string {
   }
 }
 
+/** Continuous heat color from flood score 0–100 (same palette as risk index). */
+export function scoreHeatColor(score: number | undefined | null): string {
+  const s = Math.max(0, Math.min(100, Number(score) || 0))
+  if (s >= 85) return '#b91c1c'
+  if (s >= 65) return '#ea580c'
+  if (s >= 40) return '#ca8a04'
+  return '#16a34a'
+}
+
 export function riskBgClass(level: string | undefined | null): string {
   switch ((level || '').toLowerCase()) {
     case 'extreme':

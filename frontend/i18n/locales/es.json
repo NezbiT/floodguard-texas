@@ -23,6 +23,7 @@
     "hint": "Escribe cualquier ZIP de 5 dígitos de EE.UU. o haz clic en un pin para ver la zona FEMA.",
     "disclaimer": "Solo informativo. Datos NFHL de FEMA cuando hay cobertura. No es una determinación oficial para seguros o préstamos.",
     "legend": "Niveles de riesgo",
+    "heatHint": "El mapa de calor usa los mismos colores del índice (verde → rojo según score).",
     "lookupError": "No se pudo consultar el riesgo. Prueba otro ZIP.",
     "nearest": "Zona demo más cercana · {km} km",
     "nwsTitle": "Alertas NWS de inundación",
@@ -43,7 +44,9 @@
   "about": {
     "title": "Acerca de FloodGuard",
     "body": "FloodGuard es el producto de inundación de TxBizFinder Intelligence. FEMA NFHL es nacional: cualquier ZIP de EE.UU. Empezó en Texas; la cobertura es USA donde hay mapas efectivos.",
-    "sources": "FEMA NFHL MapServer (capa 28) a nivel nacional, NWS por punto/estado, geocodificación Zippopotam. Pins de metros de ejemplo. Siguiente: USGS y OpenFEMA.",
+    "sources": "APIs prioritarias: FEMA NFHL + NWS + USGS + OpenFEMA. Scrape solo si falta una capa local no expuesta oficialmente. Nunca scrapear HTML de weather.gov ni la UI de FEMA MSC.",
+    "catalogTitle": "Catálogo de fuentes de datos",
+    "catalogHint": "Cada fuente tiene un badge de confianza (Oficial / Open data agencia / Scrape best-effort / Modelado-demo) documentado en suite meta.",
     "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse, MapHub."
   },
   "fema": {
