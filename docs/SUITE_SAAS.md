@@ -4,7 +4,7 @@ Part of **TxBizFinder Intelligence** (Texas situational awareness for contractor
 
 ## Product role
 
-ZIP / map **flood risk awareness** with live **NWS alerts** (free). Future: FEMA NFHL official zones for Pro/Enterprise tiers.
+ZIP / map **flood risk awareness** with **FEMA NFHL** point lookup (public MapServer) + live **NWS alerts**.
 
 ## Unified stack
 
@@ -23,8 +23,8 @@ ZIP / map **flood risk awareness** with live **NWS alerts** (free). Future: FEMA
 
 ## Public data roadmap
 
-1. **NWS** `api.weather.gov` — live (implemented)
-2. **FEMA NFHL** ArcGIS MapServer — official SFHA
+1. **FEMA NFHL** MapServer layer 28 — live (implemented on `/api/risk/lookup` + `/api/risk/nfhl`)
+2. **NWS** `api.weather.gov` — live (implemented)
 3. **USGS NWIS** stream gauges
 4. **NOAA CO-OPS** coastal water levels
 5. **OpenFEMA** FIMA NFIP claims (aggregate)
@@ -33,6 +33,7 @@ ZIP / map **flood risk awareness** with live **NWS alerts** (free). Future: FEMA
 
 - `GET /api/health`
 - `GET /api/suite/meta`
-- `GET /api/risk/lookup?zip=77002`
-- `GET /api/risk/zones`
+- `GET /api/risk/lookup?zip=77002` — NFHL + NWS (set `nfhl=0` to skip FEMA)
+- `GET /api/risk/nfhl?lat=29.76&lng=-95.37` — direct NFHL
+- `GET /api/risk/zones` — map pin demo centroids
 - `GET /api/alerts/active`

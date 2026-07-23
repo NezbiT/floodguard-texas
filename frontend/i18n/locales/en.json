@@ -15,18 +15,24 @@
   },
   "home": {
     "title": "Is your neighborhood flood-ready?",
-    "subtitle": "Look up a Texas ZIP or tap the map. Demo risk scores help families and renters understand local flood exposure — not an insurance quote.",
+    "subtitle": "Look up a Texas ZIP or tap the map. We query FEMA’s National Flood Hazard Layer (NFHL) at that point, plus live NWS alerts — not an insurance quote.",
     "zipLabel": "ZIP code",
     "zipPlaceholder": "77002",
     "check": "Check risk",
     "riskTitle": "Risk snapshot",
-    "hint": "Enter a 5-digit ZIP or click a map pin to see risk factors.",
-    "disclaimer": "Demo scores only. Not a FEMA flood-zone determination. Do not use for insurance or legal decisions.",
+    "hint": "Enter a 5-digit ZIP or click a map pin to see FEMA zone + risk factors.",
+    "disclaimer": "Educational only. FEMA NFHL effective data when available. Not an official flood determination for insurance or lending.",
     "legend": "Risk levels",
     "lookupError": "Could not look up risk. Try another ZIP.",
     "nearest": "Nearest demo zone · {km} km",
     "nwsTitle": "Live NWS flood-related alerts (TX)",
-    "nwsNone": "No active flood-related NWS alerts in Texas right now."
+    "nwsNone": "No active flood-related NWS alerts in Texas right now.",
+    "femaBadge": "FEMA NFHL",
+    "femaZone": "Flood zone",
+    "femaSfha": "Special Flood Hazard Area",
+    "femaYes": "Yes",
+    "femaNo": "No",
+    "femaFallback": "Using demo + NWS (NFHL unavailable at this point)"
   },
   "levels": {
     "low": "Low",
@@ -37,7 +43,7 @@
   "about": {
     "title": "About FloodGuard",
     "body": "FloodGuard Texas is a public-impact portal in the TxBizFinder Intelligence suite. It helps everyday Texans see illustrative flood risk near them — bayous, coast, flash-flood alley — with a map-first experience.",
-    "sources": "Demo base scores for major metros plus live National Weather Service alerts (api.weather.gov). Next: FEMA NFHL layers and USGS gauges behind the same lookup API.",
+    "sources": "FEMA NFHL MapServer (Flood Hazard Zones, layer 28) for point lookups, plus NWS alerts (api.weather.gov). Map pins still use curated demo centroids for browsing. Next: USGS gauges and OpenFEMA claims.",
     "suite": "Sister apps: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse Texas."
   }
 }

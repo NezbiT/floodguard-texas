@@ -9,6 +9,7 @@ export default defineEventHandler(() => ({
       'GET /api/health',
       'GET /api/suite/meta',
       'GET /api/risk/lookup?zip=77002',
+      'GET /api/risk/nfhl?lat=29.76&lng=-95.37',
       'GET /api/risk/zones',
       'GET /api/alerts/active',
     ],

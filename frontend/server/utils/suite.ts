@@ -3,7 +3,7 @@
 export const PRODUCT_ID = 'floodguard-texas' as const
 export const PRODUCT_NAME = 'FloodGuard Texas'
 export const PRODUCT_DOMAIN = 'flood.txbizfinder.com'
-export const API_VERSION = '1.1.0'
+export const API_VERSION = '1.2.0'
 
 export type SuiteTier = 'free' | 'contractor' | 'pro' | 'enterprise'
 
@@ -15,13 +15,13 @@ export function suiteMeta(extra: Record<string, unknown> = {}) {
     domain: PRODUCT_DOMAIN,
     apiVersion: API_VERSION,
     tiers: {
-      free: 'Public map + ZIP demo risk + NWS alerts (TX)',
+      free: 'Public map + FEMA NFHL point lookup + NWS alerts (TX)',
       contractor: 'Higher rate limits, saved ZIPs, CSV export',
-      pro: 'FEMA NFHL parcels, historical claims proxy, API keys',
+      pro: 'Bulk NFHL, historical claims proxy, API keys',
       enterprise: 'Bulk geocode, SLA, white-label, SSO',
     } satisfies Record<SuiteTier, string>,
     disclaimer:
-      'Not a FEMA flood-zone determination. Not insurance advice. Educational / situational awareness only.',
+      'NFHL data is educational only. Not an official FEMA flood determination or insurance advice.',
     ...extra,
   }
 }
