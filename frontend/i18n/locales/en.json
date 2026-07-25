@@ -1,21 +1,21 @@
 {
   "app": {
     "name": "FloodGuard",
-    "tagline": "FEMA NFHL flood zones · USA"
+    "tagline": "FEMA NFHL flood zones Â· USA"
   },
   "nav": {
     "map": "Map",
     "about": "About"
   },
   "common": {
-    "loading": "Loading…",
+    "loading": "Loadingâ€¦",
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
     "createdBy": "Created by"
   },
   "home": {
     "title": "Is your neighborhood flood-ready?",
-    "subtitle": "Any US ZIP or map pin. We query FEMA’s National Flood Hazard Layer (NFHL) nationwide, plus live NWS alerts at that point — not an insurance quote.",
+    "subtitle": "Any US ZIP or map pin. We query FEMAâ€™s National Flood Hazard Layer (NFHL) nationwide, plus live NWS alerts at that point â€” not an insurance quote.",
     "zipLabel": "US ZIP code",
     "zipPlaceholder": "33139",
     "check": "Check risk",
@@ -23,9 +23,9 @@
     "hint": "Enter any 5-digit US ZIP or click a map pin to see FEMA zone + risk factors.",
     "disclaimer": "Educational only. FEMA NFHL effective data when available. Not an official flood determination for insurance or lending.",
     "legend": "Risk levels",
-    "heatHint": "Map heat uses the same colors as the flood index (green → red by score).",
+    "heatHint": "Map heat uses the same colors as the flood index (green â†’ red by score).",
     "lookupError": "Could not look up risk. Try another ZIP.",
-    "nearest": "Nearest demo zone · {km} km",
+    "nearest": "Nearest demo zone Â· {km} km",
     "nwsTitle": "Live NWS flood-related alerts",
     "nwsNone": "No active flood-related NWS alerts for the current scope.",
     "femaBadge": "FEMA NFHL",
@@ -43,7 +43,7 @@
   },
   "about": {
     "title": "About FloodGuard",
-    "body": "FloodGuard is the flood product in the TxBizFinder Intelligence suite. FEMA NFHL is national — look up any US ZIP. Started in Texas; coverage is USA where effective flood maps exist.",
+    "body": "FloodGuard is the flood product in the TxBizFinder Intelligence suite. FEMA NFHL is national â€” look up any US ZIP. Started in Texas; coverage is USA where effective flood maps exist.",
     "sources": "Priority APIs: FEMA NFHL + NWS + USGS + OpenFEMA. Scrape only if a local layer is missing and not exposed officially. Never scrape weather.gov HTML or FEMA MSC UI.",
     "catalogTitle": "Data sources catalog",
     "catalogHint": "Each source has a confidence badge (Official / Agency open data / Best-effort scrape / Modeled-demo) documented in suite meta.",
@@ -66,7 +66,7 @@
   "insurance": {
     "nfip": "National Flood Insurance Program",
     "nfipDescription": "If you have a federal mortgage in a flood zone, flood insurance is mandatory.",
-    "twia": "TWIA — Texas Wind & Hail Insurance",
+    "twia": "TWIA â€” Texas Wind & Hail Insurance",
     "twiaDescription": "Alternative insurance option in Texas for areas not served by standard carriers.",
     "tdi": "Texas Department of Insurance",
     "learnInsurance": "Learn about flood insurance"
@@ -78,5 +78,27 @@
     "usgs": "Stream gauges (USGS NWIS)",
     "noaa": "Water levels (NOAA CO-OPS)",
     "atlas14": "Precipitation design (NOAA)"
+  },
+  "legal": {
+    "termsTitle": "Terms of use",
+    "privacyTitle": "Privacy notice",
+    "updated": "Last updated: 2026-07-24. Not legal advice — consult counsel for production contracts.",
+    "notAdvice": "This product provides informational tools based on public and third-party data. It is not a substitute for professional advice, official agency determinations, or licensed services.",
+    "termsH1": "1. Nature of the service",
+    "termsB1": "You receive access to maps, APIs, and analytics for situational awareness. Flood, grid, air, permit, and business data may be delayed, incomplete, modeled, or labeled demo. We do not provide FEMA flood determinations, insurance quotes, underwriting decisions, ERCOT operational instructions, or legal/compliance certifications.",
+    "termsH2": "2. Acceptable use",
+    "termsB2": "You may not overload our systems, bypass rate limits or authentication, scrape our UI to rebuild the product, or use the service for unlawful solicitation. Contacting business leads requires compliance with TCPA, CAN-SPAM, and state telemarketing rules.",
+    "termsH3": "3. No warranties; limitation of liability",
+    "termsB3": "Service is provided AS IS and AS AVAILABLE. To the maximum extent permitted by law, we disclaim warranties of accuracy and fitness for a particular purpose. Liability is limited to fees you paid us in the prior 12 months (or USD 100 if free).",
+    "termsH4": "4. Governing law",
+    "termsB4": "These terms are governed by the laws of the State of Texas, excluding conflict-of-law rules. Venue lies in Texas state or federal courts unless a written Enterprise MSA says otherwise.",
+    "privacyH1": "1. Data we may process",
+    "privacyB1": "Depending on the product: IP address and request logs; ZIP codes or map coordinates you submit; account email if you register; API keys; saved searches; optional location if you grant browser geolocation (ChannelWatch). We process public open-data and may store derived warehouse tables.",
+    "privacyH2": "2. Purposes",
+    "privacyB2": "Operate and secure the service, improve reliability, provide saved features, bill paid tiers, and comply with law. We do not sell personal information as defined under the CCPA.",
+    "privacyH3": "3. Retention and security",
+    "privacyB3": "Logs are retained for a limited operational period. Use TLS in production, rotate API keys, and restrict admin keys. No method of transmission is 100% secure.",
+    "privacyH4": "4. Your rights",
+    "privacyB4": "Depending on your location (including California CCPA/CPRA and, if EU personal data is processed, GDPR), you may have rights to access, delete, or correct personal data. Contact legal@txbizfinder.com. Do not send sensitive personal data (SSN, health, full payment card) through this product."
   }
 }

@@ -93,5 +93,8 @@ export default defineEventHandler(() =>
       possible: ['Local drainage layers if no official service'],
       forbidden: ['FEMA MSC HTML', 'weather.gov HTML', 'private insurer sites'],
     },
+    disclaimer:
+      'Educational only. Not an official FEMA flood determination, survey, or insurance/lending advice.',
+    legalPaths: ['/terms', '/privacy'],
   }),
 )

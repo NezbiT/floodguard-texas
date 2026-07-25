@@ -1,37 +1,37 @@
 {
   "app": {
     "name": "FloodGuard",
-    "tagline": "Zonas FEMA NFHL · EE.UU."
+    "tagline": "Zonas FEMA NFHL Â· EE.UU."
   },
   "nav": {
     "map": "Mapa",
     "about": "Acerca de"
   },
   "common": {
-    "loading": "Cargando…",
+    "loading": "Cargandoâ€¦",
     "lightMode": "Modo claro",
     "darkMode": "Modo oscuro",
     "createdBy": "Creado por"
   },
   "home": {
-    "title": "¿Tu barrio está listo ante inundaciones?",
-    "subtitle": "Cualquier ZIP de EE.UU. o pin del mapa. Consultamos FEMA NFHL a nivel nacional y alertas NWS en ese punto — no es una cotización de seguro.",
+    "title": "Â¿Tu barrio estÃ¡ listo ante inundaciones?",
+    "subtitle": "Cualquier ZIP de EE.UU. o pin del mapa. Consultamos FEMA NFHL a nivel nacional y alertas NWS en ese punto â€” no es una cotizaciÃ³n de seguro.",
     "zipLabel": "ZIP de EE.UU.",
     "zipPlaceholder": "33139",
     "check": "Ver riesgo",
     "riskTitle": "Resumen de riesgo",
-    "hint": "Escribe cualquier ZIP de 5 dígitos de EE.UU. o haz clic en un pin para ver la zona FEMA.",
-    "disclaimer": "Solo informativo. Datos NFHL de FEMA cuando hay cobertura. No es una determinación oficial para seguros o préstamos.",
+    "hint": "Escribe cualquier ZIP de 5 dÃ­gitos de EE.UU. o haz clic en un pin para ver la zona FEMA.",
+    "disclaimer": "Solo informativo. Datos NFHL de FEMA cuando hay cobertura. No es una determinaciÃ³n oficial para seguros o prÃ©stamos.",
     "legend": "Niveles de riesgo",
-    "heatHint": "El mapa de calor usa los mismos colores del índice (verde → rojo según score).",
+    "heatHint": "El mapa de calor usa los mismos colores del Ã­ndice (verde â†’ rojo segÃºn score).",
     "lookupError": "No se pudo consultar el riesgo. Prueba otro ZIP.",
-    "nearest": "Zona demo más cercana · {km} km",
-    "nwsTitle": "Alertas NWS de inundación",
-    "nwsNone": "No hay alertas NWS de inundación en el alcance actual.",
+    "nearest": "Zona demo mÃ¡s cercana Â· {km} km",
+    "nwsTitle": "Alertas NWS de inundaciÃ³n",
+    "nwsNone": "No hay alertas NWS de inundaciÃ³n en el alcance actual.",
     "femaBadge": "FEMA NFHL",
-    "femaZone": "Zona de inundación",
-    "femaSfha": "Área especial de riesgo (SFHA)",
-    "femaYes": "Sí",
+    "femaZone": "Zona de inundaciÃ³n",
+    "femaSfha": "Ãrea especial de riesgo (SFHA)",
+    "femaYes": "SÃ­",
     "femaNo": "No",
     "femaFallback": "Usando demo + NWS (NFHL no disponible en este punto)"
   },
@@ -43,31 +43,31 @@
   },
   "about": {
     "title": "Acerca de FloodGuard",
-    "body": "FloodGuard es el producto de inundación de TxBizFinder Intelligence. FEMA NFHL es nacional: cualquier ZIP de EE.UU. Empezó en Texas; la cobertura es USA donde hay mapas efectivos.",
+    "body": "FloodGuard es el producto de inundaciÃ³n de TxBizFinder Intelligence. FEMA NFHL es nacional: cualquier ZIP de EE.UU. EmpezÃ³ en Texas; la cobertura es USA donde hay mapas efectivos.",
     "sources": "APIs prioritarias: FEMA NFHL + NWS + USGS + OpenFEMA. Scrape solo si falta una capa local no expuesta oficialmente. Nunca scrapear HTML de weather.gov ni la UI de FEMA MSC.",
-    "catalogTitle": "Catálogo de fuentes de datos",
+    "catalogTitle": "CatÃ¡logo de fuentes de datos",
     "catalogHint": "Cada fuente tiene un badge de confianza (Oficial / Open data agencia / Scrape best-effort / Modelado-demo) documentado en suite meta.",
     "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, PowerPulse, MapHub."
   },
   "fema": {
-    "zoneExplanation": "¿Qué significa esta zona?",
+    "zoneExplanation": "Â¿QuÃ© significa esta zona?",
     "zoneDetails": "Detalles de la zona",
-    "annualChance": "Probabilidad anual de inundación",
+    "annualChance": "Probabilidad anual de inundaciÃ³n",
     "insuranceRequired": "Seguro NFIP Requerido",
     "insuranceOptional": "Seguro NFIP Opcional",
-    "typicalCost": "Costo típico del seguro",
+    "typicalCost": "Costo tÃ­pico del seguro",
     "keyFactors": "Factores clave",
     "officialLinks": "Recursos oficiales",
     "msc": "Ver Centro de Mapeo FEMA",
-    "learnMore": "Más información",
+    "learnMore": "MÃ¡s informaciÃ³n",
     "riskLevel": "Nivel de riesgo",
-    "sfha": "Área especial de riesgo (SFHA)"
+    "sfha": "Ãrea especial de riesgo (SFHA)"
   },
   "insurance": {
     "nfip": "Programa Nacional de Seguro contra Inundaciones",
-    "nfipDescription": "Si tiene una hipoteca federal en una zona de inundación, el seguro es obligatorio.",
-    "twia": "TWIA — Seguros de Viento y Granizo de Texas",
-    "twiaDescription": "Opción alternativa de seguros en Texas para áreas no servidas por aseguradoras estándar.",
+    "nfipDescription": "Si tiene una hipoteca federal en una zona de inundaciÃ³n, el seguro es obligatorio.",
+    "twia": "TWIA â€” Seguros de Viento y Granizo de Texas",
+    "twiaDescription": "OpciÃ³n alternativa de seguros en Texas para Ã¡reas no servidas por aseguradoras estÃ¡ndar.",
     "tdi": "Departamento de Seguros de Texas",
     "learnInsurance": "Aprende sobre seguros contra inundaciones"
   },
@@ -77,6 +77,28 @@
     "openfema": "Datos de reclamaciones NFIP (OpenFEMA)",
     "usgs": "Sensores de corriente (USGS NWIS)",
     "noaa": "Niveles de agua (NOAA CO-OPS)",
-    "atlas14": "Precipitación de diseño (NOAA)"
+    "atlas14": "PrecipitaciÃ³n de diseÃ±o (NOAA)"
+  },
+  "legal": {
+    "termsTitle": "Terminos de uso",
+    "privacyTitle": "Aviso de privacidad",
+    "updated": "Ultima actualizacion: 2026-07-24. No es asesoramiento legal.",
+    "notAdvice": "Este producto ofrece herramientas informativas basadas en datos publicos y de terceros. No sustituye asesoramiento profesional ni determinaciones oficiales de agencias.",
+    "termsH1": "1. Naturaleza del servicio",
+    "termsB1": "You receive access to maps, APIs, and analytics for situational awareness. Flood, grid, air, permit, and business data may be delayed, incomplete, modeled, or labeled demo. We do not provide FEMA flood determinations, insurance quotes, underwriting decisions, ERCOT operational instructions, or legal/compliance certifications.",
+    "termsH2": "2. Uso aceptable",
+    "termsB2": "You may not overload our systems, bypass rate limits or authentication, scrape our UI to rebuild the product, or use the service for unlawful solicitation. Contacting business leads requires compliance with TCPA, CAN-SPAM, and state telemarketing rules.",
+    "termsH3": "3. Sin garantias; limitacion de responsabilidad",
+    "termsB3": "Service is provided AS IS and AS AVAILABLE. To the maximum extent permitted by law, we disclaim warranties of accuracy and fitness for a particular purpose. Liability is limited to fees you paid us in the prior 12 months (or USD 100 if free).",
+    "termsH4": "4. Ley aplicable",
+    "termsB4": "These terms are governed by the laws of the State of Texas, excluding conflict-of-law rules. Venue lies in Texas state or federal courts unless a written Enterprise MSA says otherwise.",
+    "privacyH1": "1. Datos que podemos tratar",
+    "privacyB1": "Depending on the product: IP address and request logs; ZIP codes or map coordinates you submit; account email if you register; API keys; saved searches; optional location if you grant browser geolocation (ChannelWatch). We process public open-data and may store derived warehouse tables.",
+    "privacyH2": "2. Finalidades",
+    "privacyB2": "Operate and secure the service, improve reliability, provide saved features, bill paid tiers, and comply with law. We do not sell personal information as defined under the CCPA.",
+    "privacyH3": "3. Retencion y seguridad",
+    "privacyB3": "Logs are retained for a limited operational period. Use TLS in production, rotate API keys, and restrict admin keys. No method of transmission is 100% secure.",
+    "privacyH4": "4. Tus derechos",
+    "privacyB4": "Depending on your location (including California CCPA/CPRA and, if EU personal data is processed, GDPR), you may have rights to access, delete, or correct personal data. Contact legal@txbizfinder.com. Do not send sensitive personal data (SSN, health, full payment card) through this product."
   }
 }
